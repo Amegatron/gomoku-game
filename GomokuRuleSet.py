@@ -42,12 +42,12 @@ class GomokuRuleSet:
                             game_board.board[i][j+4] == current_player:
                         return current_player
 
-                if i <= game_board.x - 4 and j <= game_board.y - 4:
-                    if game_board.board[i+1][j+1] == current_player and \
-                            game_board.board[i+2][j+2] == current_player and \
-                            game_board.board[i+3][j+3] == current_player and \
-                            game_board.board[i+4][j+4] == current_player:
-                        return current_player
+                    if i <= game_board.x - 4:
+                        if game_board.board[i+1][j+1] == current_player and \
+                                game_board.board[i+2][j+2] == current_player and \
+                                game_board.board[i+3][j+3] == current_player and \
+                                game_board.board[i+4][j+4] == current_player:
+                            return current_player
 
                 # No need to check other directions because they are opposite to what
                 # we have already checked

@@ -23,6 +23,10 @@ class GomokuRuleSetTest(unittest.TestCase):
         board4 = GameBoard(10, 10)
         board5 = GameBoard(10, 10)
         board6 = GameBoard(10, 10)
+        board7 = GameBoard(10, 10)
+        board8 = GameBoard(10, 10)
+        board9 = GameBoard(10, 10)
+        board10 = GameBoard(10, 10)
 
         for i in range(5):
             board1.make_move(1, i, 1)
@@ -30,7 +34,11 @@ class GomokuRuleSetTest(unittest.TestCase):
             board3.make_move(8, i, 2)
             board4.make_move(i, 8, 1)
             board5.make_move(i, i, 1)
-            board6.make_move(i+2, 8-i, 2)
+            board6.make_move(i, 4-i, 2)
+            board7.make_move(5+i, 9-i, 2)
+            board8.make_move(5+i, i, 1)
+            board9.make_move(i, 5+i, 1)
+            board10.make_move(5+i, 5+i, 2)
 
         boards.append((board1, 1))
         boards.append((board2, 2))
@@ -38,6 +46,10 @@ class GomokuRuleSetTest(unittest.TestCase):
         boards.append((board4, 1))
         boards.append((board5, 1))
         boards.append((board6, 2))
+        boards.append((board7, 2))
+        boards.append((board8, 1))
+        boards.append((board9, 1))
+        boards.append((board10, 2))
 
         board1 = GameBoard(10, 10)
         board2 = GameBoard(10, 10)
