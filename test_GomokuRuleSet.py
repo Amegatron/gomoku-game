@@ -1,3 +1,4 @@
+import random
 import unittest
 
 from GameBoard import GameBoard
@@ -85,6 +86,8 @@ class GomokuRuleSetTest(unittest.TestCase):
         """
         board1 = GameBoard(10, 10)
         board2 = GameBoard(10, 10)
+        board3 = GameBoard(10, 10)
+
         for i in range(10):
             for j in range(5):
                 player = (i % 2 + j % 2) % 2 + 1
@@ -93,9 +96,15 @@ class GomokuRuleSetTest(unittest.TestCase):
 
                 board2.make_move(j*2, i, player)
                 board2.make_move(j*2 + 1, i, player)
+                board3.make_move(j*2, i, player)
+                board3.make_move(j*2 + 1, i, player)
+
+        for i in range(10):
+            board3.make_move(random.randint(0, 9), random.randint(0, 9), 0)
 
         boards.append((board1, -1))
         boards.append((board2, -1))
+        boards.append((board3, 0))
 
         return boards
 
