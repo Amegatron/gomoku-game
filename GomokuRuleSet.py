@@ -3,7 +3,7 @@ from GameBoard import GameBoard
 
 class GomokuRuleSet:
     def can_place(self, game_board: GameBoard, x, y):
-        return game_board.board[x][y] == 0
+        return 0 <= x < game_board.x and game_board.board[x][y] == 0 and 0 <= y < game_board.y
 
     def check_game_ended(self, game_board: GameBoard):
         """

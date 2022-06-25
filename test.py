@@ -1,3 +1,4 @@
+from GameBoardSerializer import GameBoardSerializer
 from GameBoardStringRenderer import GameBoardStringRenderer
 from GomokuGame import GomokuGame
 import re

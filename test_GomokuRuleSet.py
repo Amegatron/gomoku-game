@@ -15,6 +15,23 @@ class GomokuRuleSetTest(unittest.TestCase):
                 result = board_data[1]
                 self.assertEquals(result, rule_set.check_game_ended(board))
 
+    def test_can_place(self):
+        rule_set = GomokuRuleSet()
+        board = GameBoard(10, 10)
+
+        for i in range(20):
+            self.assertTrue(rule_set.can_place(board, random.randint(0, 9), random.randint(0, 9)))
+
+        self.assertFalse(rule_set.can_place(board, -5, 0))
+        self.assertFalse(rule_set.can_place(board, 0, -5))
+        self.assertFalse(rule_set.can_place(board, 20, 20))
+        self.assertFalse(rule_set.can_place(board, -10, -20))
+        self.assertFalse(rule_set.can_place(board, -10, 20))
+        self.assertFalse(rule_set.can_place(board, 10, -20))
+
+        board.make_move(5, 5, 1)
+        self.assertFalse(rule_set.can_place(board, 5, 5))
+
     def _get_test_game_boards(self):
         boards = []
 
