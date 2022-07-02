@@ -1,4 +1,4 @@
-from GameBoard import GameBoard
+from Gomoku.Engine.GameBoard import GameBoard
 
 
 class GameBoardStringRenderer:

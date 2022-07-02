@@ -1,6 +1,5 @@
-from GameBoardSerializer import GameBoardSerializer
-from GameBoardStringRenderer import GameBoardStringRenderer
-from GomokuGame import GomokuGame
+from Gomoku.Engine.GameBoardStringRenderer import GameBoardStringRenderer
+from Gomoku.Engine.GomokuGame import GomokuGame
 import re
 
 def get_player_char_by_number(player_num: int):

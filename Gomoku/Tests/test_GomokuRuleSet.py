@@ -1,8 +1,8 @@
 import random
 import unittest
 
-from GameBoard import GameBoard
-from GomokuRuleSet import GomokuRuleSet
+from Gomoku.Engine.GameBoard import GameBoard
+from Gomoku.Engine.GomokuRuleSet import GomokuRuleSet
 
 
 class GomokuRuleSetTest(unittest.TestCase):

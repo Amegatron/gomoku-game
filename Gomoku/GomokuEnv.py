@@ -1,5 +1,5 @@
-from GameBoard import GameBoard
-from GomokuGame import GomokuGame
+from Gomoku.Engine.GameBoard import GameBoard
+from Gomoku.Engine.GomokuGame import GomokuGame
 import numpy as np
 
 

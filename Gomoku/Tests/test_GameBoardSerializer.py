@@ -1,6 +1,6 @@
 import unittest
-from GameBoard import GameBoard
-from GameBoardSerializer import GameBoardSerializer
+from Gomoku.Engine.GameBoard import GameBoard
+from Gomoku.Engine.GameBoardSerializer import GameBoardSerializer
 
 
 class MyTestCase(unittest.TestCase):
