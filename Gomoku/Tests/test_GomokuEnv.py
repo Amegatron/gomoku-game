@@ -1,6 +1,6 @@
 import random
 import unittest
-from Gomoku.GomokuEnv import GomokuEnv
+from Gomoku.Agent.GomokuEnv import GomokuEnv
 
 
 class MyTestCase(unittest.TestCase):
