@@ -26,16 +26,18 @@ class GomokuModel(torch.nn.Module):
             torch.nn.ReLU(),
             torch.nn.Linear(512, 256),
             torch.nn.ReLU(),
-            torch.nn.Linear(256, x*y)
+            torch.nn.Linear(256, x*y),
+            torch.nn.Sigmoid(),
         )
 
         self.soft_max = torch.nn.Softmax(dim=1)
 
     def forward(self, x, output_mask=None):
         val = self.network(x)
-        val = torch.reshape(val, (x.shape[0], self.x, self.y))
 
-        if output_mask:
-            val *= output_mask
+        if output_mask is not None:
+            output_mask = torch.flatten(torch.Tensor(output_mask))
+            val[:] *= output_mask
 
-        return torch.nn.Softmax(dim=2)(val)
+        val = self.soft_max(val)
+        return torch.reshape(val, (x.shape[0], self.x, self.y))
