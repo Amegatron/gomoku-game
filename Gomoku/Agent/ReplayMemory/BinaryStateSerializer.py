@@ -2,6 +2,16 @@ from Gomoku.Agent.ReplayMemory.Contracts.StateSerializerInterface import StateSe
 
 
 class BinaryStateSerializer(StateSerializerInterface):
+    """
+    Base idea: each byte (8 bits) holds info about 4 consecutive cells on gameboard:
+    each pair of bits holds exact cell value: 00, 01, or 10.
+
+    Compacting can also be added here: in general use, there can't be pairs of bits like '11'. So,
+    we can use highest '11', for example, as an indicator of a series of zeros, where maximum value
+    of the counter can be 63 (the rest 6 bits).
+
+    This serializer is somewhat abandoned, cause TernarySerializer gives out much more compact serialization.
+    """
     def serialize(self, state) -> bytearray:
         result = bytearray()
         x = state[0]

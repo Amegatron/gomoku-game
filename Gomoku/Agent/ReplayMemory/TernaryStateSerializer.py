@@ -4,6 +4,28 @@ from Gomoku.Agent.ReplayMemory.Contracts.StateSerializerInterface import StateSe
 
 
 class TernaryStateSerializer(StateSerializerInterface):
+    """
+    Base idea of this serializer is to use ternary number system, cause each cell
+    of the board has 3 mutually exclusive states. It also compacts series of zeros
+    into one byte, holding the length of that series.
+
+    Four consecutive cells, represented in ternary system, will have a max value
+    of '2222', which is 80 in decimal. Since it is less than 128, it can fit in
+    7 bits.
+
+    Extra (highest) bit is an indicator, that this byte holds not exact cell values,
+    but instead - a counter of following zeros, which maximum value can be 127.
+
+    Summarizing:
+        Each byte in our serialization can be of two kinds:
+            0XXXXXXX - is a representation of consecutive 4 cells, where binary XXXXXXX, converted
+                       to ternary system, gives exact values of those cells (pad-4)
+            1YYYYYYY - is a representation of consecutive zeros, where binary YYYYYYY - is the amount
+                       of them (max. 127)
+
+    Also, at the start of resulting set of bytes, 2 are the size of game board.
+    """
+
     def serialize(self, state) -> bytearray:
         result = bytearray()
         x = state.shape[1]
