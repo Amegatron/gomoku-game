@@ -42,7 +42,7 @@ class TernaryStateSerializer(StateSerializerInterface):
                     quartet = ""
                     counter = 0
 
-                if zeros_counter <= 4:
+                if zeros_counter <= 4 and (not append_zero_series or cell_val != 0):
                     counter += 1
                     quartet = str(cell_val) + quartet
                 else:

@@ -45,6 +45,7 @@ class ReplaySampleSerializer(ReplaySampleSerializerInterface):
         pos += 2
         reward = data[pos]
         pos += 1
-        done = bool(data[pos])
+        done_raw = data[pos]
+        done = bool(done_raw - ord("0"))
 
         return ReplaySample(state, action, reward, next_state, done)

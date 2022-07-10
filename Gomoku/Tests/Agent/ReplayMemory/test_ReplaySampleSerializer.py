@@ -12,7 +12,7 @@ class MyTestCase(unittest.TestCase):
         fixture = ReplaySampleFixture()
         serializer = ReplaySampleSerializer(TernaryStateSerializer())
 
-        for i in range(50):
+        for i in range(100):
             with self.subTest(i):
                 sample = fixture.generate_sample()
                 serialized_sample = serializer.serialize(sample)
