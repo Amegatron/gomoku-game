@@ -35,7 +35,7 @@ class GomokuEnv:
 
     # TODO: pass current_player as argument
     def board_to_state(self, board: GameBoard):
-        state = np.zeros((2, board.x, board.y), dtype=np.int)
+        state = np.zeros((2, board.x, board.y), dtype=int)
         for i in range(board.x):
             for j in range(board.y):
                 val = board.board[i][j]
