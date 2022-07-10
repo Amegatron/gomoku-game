@@ -13,12 +13,12 @@ class GomokuEnv:
     def reset(self):
         self.game = GomokuGame(self.x, self.y)
 
-        return self._board_to_state(self.game.board)
+        return self.board_to_state(self.game.board)
 
     def step(self, x, y):
         current_player = self.game.get_current_player()
         result = self.game.make_move(x, y)
-        obs = self._board_to_state(self.game.board)
+        obs = self.board_to_state(self.game.board)
         done = result != 0
         reward = self.win_reward if result == current_player else 0
 
@@ -33,7 +33,8 @@ class GomokuEnv:
 
         return mask
 
-    def _board_to_state(self, board: GameBoard):
+    # TODO: pass current_player as argument
+    def board_to_state(self, board: GameBoard):
         state = np.zeros((2, board.x, board.y), dtype=np.int)
         for i in range(board.x):
             for j in range(board.y):

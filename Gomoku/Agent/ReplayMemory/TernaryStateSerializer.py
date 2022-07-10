@@ -1,6 +1,6 @@
 import numpy as np
 
-from Gomoku.Agent.ReplayMemory.StateSerializerInterface import StateSerializerInterface
+from Gomoku.Agent.ReplayMemory.Contracts.StateSerializerInterface import StateSerializerInterface
 
 
 class TernaryStateSerializer(StateSerializerInterface):

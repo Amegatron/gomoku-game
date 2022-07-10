@@ -1,4 +1,4 @@
-from Gomoku.Agent.ReplayMemory.StateSerializerInterface import StateSerializerInterface
+from Gomoku.Agent.ReplayMemory.Contracts.StateSerializerInterface import StateSerializerInterface
 
 
 class BinaryStateSerializer(StateSerializerInterface):

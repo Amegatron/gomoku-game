@@ -1,6 +1,9 @@
+from Gomoku.Agent.GomokuEnv import GomokuEnv
+from Gomoku.Agent.ReplayMemory.TernaryStateSerializer import TernaryStateSerializer
 from Gomoku.Engine.GameBoardStringRenderer import GameBoardStringRenderer
 from Gomoku.Engine.GomokuGame import GomokuGame
 import re
+
 
 def get_player_char_by_number(player_num: int):
     return "X" if player_num == 1 else "O"

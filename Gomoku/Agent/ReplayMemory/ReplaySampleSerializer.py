@@ -1,22 +1,50 @@
-"""
-Serializes replay memory sample
-"""
+from Gomoku.Agent.ReplayMemory.Contracts.ReplaySampleSerializerInterface import ReplaySampleSerializerInterface
 from Gomoku.Agent.ReplayMemory.ReplaySample import ReplaySample
+from Gomoku.Agent.ReplayMemory.Contracts.StateSerializerInterface import StateSerializerInterface
 
 
-class ReplaySampleSerializer:
+class ReplaySampleSerializer(ReplaySampleSerializerInterface):
+    def __init__(self, state_serializer: StateSerializerInterface):
+        self.state_serializer = state_serializer
+
     def serialize(self, sample: ReplaySample) -> bytearray:
         result = bytearray()
-        result += self.__serialize_state(sample.state)
-        result += ord(";")
-        result += self.__serialize_state(sample.next_state)
-        result += ord(";")
-        result += [sample.action[0], ord(","), sample.action[1]]
-        result += ord(";")
-        result += ord("1") if sample.done else ord("0")
+
+        serialized_state = self.state_serializer.serialize(sample.state)
+        result += len(serialized_state).to_bytes(2, "little")
+        result += serialized_state
+
+        serialized_next_state = self.state_serializer.serialize(sample.next_state)
+        result += len(serialized_next_state).to_bytes(2, "little")
+        result += serialized_next_state
+
+        result.append(sample.action[0])
+        result.append(sample.action[1])
+        result.append(sample.reward)
+        result.append(ord("0") + int(sample.done))
 
         return result
 
-    def deserialize(self, bytes: bytearray) -> ReplaySample:
-        pass
+    # TODO: extract constant "little"
+    def deserialize(self, data: bytearray) -> ReplaySample:
+        pos = 0
 
+        len1 = int.from_bytes(data[pos:(pos + 1)], "little")
+        pos += 2
+        state_bytes = data[pos:(pos + len1)]
+        state = self.state_serializer.deserialize(state_bytes)
+        pos += len1
+
+        len2 = int.from_bytes(data[pos:(pos + 1)], "little")
+        pos += 2
+        next_state_bytes = data[pos:(pos + len2)]
+        next_state = self.state_serializer.deserialize(next_state_bytes)
+        pos += len2
+
+        action = (data[pos], data[pos + 1])
+        pos += 2
+        reward = data[pos]
+        pos += 1
+        done = bool(data[pos])
+
+        return ReplaySample(state, action, reward, next_state, done)
