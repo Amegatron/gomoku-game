@@ -12,8 +12,8 @@ class ReplayMemory:
     def random_sample(self, amount=100):
         return random.sample(self.memory, amount)
 
-    def enumerate(self, start=None):
-        return enumerate(self.memory, start)
+    def enumerate(self):
+        return enumerate(self.memory)
 
     def count(self):
         return len(self.memory)
