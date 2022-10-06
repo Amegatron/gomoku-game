@@ -1,6 +1,8 @@
 import os.path
 import random
 import unittest
+
+from Gomoku.Agent.ReplayMemory.Drivers.InMemoryIoDriver import InMemoryIoDriver
 from Gomoku.Agent.ReplayMemory.ReplayMemoryPersister import ReplayMemoryPersister
 
 
@@ -9,11 +11,10 @@ class MyTestCase(unittest.TestCase):
         slot_name = "test_slot1"
         samples_num = random.randint(5, 10)
 
-        persister = ReplayMemoryPersister(os.path.dirname(__file__) + '/../../TestDataDir')
+        persister = ReplayMemoryPersister(InMemoryIoDriver())
         samples = [self.__get_ramdom_sample(random.randint(10, 20)) for x in range(samples_num)]
         persister.save(samples, slot_name)
 
-        persister = ReplayMemoryPersister(os.path.dirname(__file__) + '/../../TestDataDir')
         loaded_samples = persister.load(slot_name)
         self.assertCountEqual(samples, loaded_samples)
 
