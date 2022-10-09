@@ -36,7 +36,7 @@ class GomokuModel(torch.nn.Module):
         val = self.network(x)
 
         if output_mask is not None:
-            output_mask = torch.flatten(torch.Tensor(output_mask))
+            output_mask = torch.flatten(torch.Tensor(output_mask), start_dim=1)
             val[:] *= output_mask
 
         val = self.soft_max(val)

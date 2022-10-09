@@ -39,7 +39,7 @@ class MyTestCase(unittest.TestCase):
         gomoku_env.step(2, 0)
         gomoku_env.step(2, 1)
         gomoku_env.step(3, 0)
-        gomoku_env.step(4, 1)
+        gomoku_env.step(3, 1)
         obs, reward, done, _ = gomoku_env.step(4, 0)
 
         self.assertEquals(reward, expected_reward)

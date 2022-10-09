@@ -1,5 +1,7 @@
 import random
 
+import numpy as np
+
 from Gomoku.Agent.ReplayMemory.ReplaySample import ReplaySample
 from Gomoku.Tests.Agent.ReplayMemory.StateFixture import StateFixture
 

@@ -10,3 +10,4 @@ class ReplaySample:
         self.reward = reward
         self.next_state = next_state
         self.done = done
+        # self.allowed_moves_mask = allowed_moves_mask

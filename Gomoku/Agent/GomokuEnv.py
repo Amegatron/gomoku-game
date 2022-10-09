@@ -33,15 +33,18 @@ class GomokuEnv:
 
         return mask
 
-    # TODO: pass current_player as argument
-    def board_to_state(self, board: GameBoard):
+    def board_to_state(self, board: GameBoard, current_player=None):
         state = np.zeros((2, board.x, board.y), dtype=np.int)
+
+        if current_player is None:
+            current_player = self.game.get_current_player()
+
         for i in range(board.x):
             for j in range(board.y):
                 val = board.board[i][j]
 
                 if val > 0:
-                    if val == self.game.get_current_player():
+                    if val == current_player:
                         state[0][i][j] = 1
                     else:
                         state[1][i][j] = 1
