@@ -39,7 +39,7 @@ class MoveMaskSerializer():
             height = data[1]
             start_pos = 2
 
-        result = np.zeros((width, height))
+        result = np.zeros((width, height), dtype=np.int)
 
         data_len = len(data)
         for i in range(start_pos, data_len):

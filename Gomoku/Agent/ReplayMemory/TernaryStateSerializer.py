@@ -26,13 +26,15 @@ class TernaryStateSerializer(StateSerializerInterface):
     Also, at the start of resulting set of bytes, 2 are the size of game board.
     """
 
-    def serialize(self, state) -> bytearray:
+    def serialize(self, state, include_size=False) -> bytearray:
         result = bytearray()
         x = state.shape[1]
         y = state.shape[2]
 
-        result.append(x)
-        result.append(y)
+        if include_size:
+            result.append(x)
+            result.append(y)
+
         zeros_counter = 0
         quartet = ""
         counter = 0
@@ -85,15 +87,21 @@ class TernaryStateSerializer(StateSerializerInterface):
 
         return result
 
-    def deserialize(self, data: bytearray):
-        x = data[0]
-        y = data[1]
+    def deserialize(self, data: bytearray, width: int = None, height: int = None):
+        if width is None or height is None:
+            x = data[0]
+            y = data[1]
+            start_pos = 2
+        else:
+            x = width
+            y = height
+            start_pos = 0
 
         state = np.zeros((2, x, y))
         counter = 0
 
         for i, byte in enumerate(data):
-            if i < 2:
+            if i < start_pos:
                 continue
 
             # zero-series

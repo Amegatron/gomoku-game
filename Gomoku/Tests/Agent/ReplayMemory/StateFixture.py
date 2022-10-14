@@ -10,6 +10,7 @@ class StateFixture:
         can be impossible in relation to Gomoku (for exampl, the whole board of X's, etc).
         """
         state = np.zeros((2, x, y))
+        move_mask = np.ones((x, y), dtype=np.int)
         attempts = random.randint(0, x*y)
 
         for i in range(attempts):
@@ -19,5 +20,6 @@ class StateFixture:
 
             if state[0][rand_x, rand_y] == 0 and state[1][rand_x, rand_y] == 0:
                 state[layer][rand_x, rand_y] = 1
+                move_mask[rand_x, rand_y] = 0
 
-        return state
+        return state, move_mask
