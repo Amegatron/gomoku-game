@@ -1,3 +1,5 @@
+import base64
+
 from Gomoku.Agent.ReplayMemory import ReplaySampleSerializer
 from Gomoku.Agent.ReplayMemory.ReplayMemory import ReplayMemory
 from Gomoku.Agent.ReplayMemory.ReplayMemoryPersister import ReplayMemoryPersister
@@ -23,13 +25,23 @@ class ReplayMemoryManager:
 
         for _, sample_raw in enumerate(samples):
             sample = self.sample_serializer.deserialize(sample_raw)
-            memory.add_sample(sample.state, sample.action, sample.reward, sample.next_state, sample.done)
+            memory.add_sample(sample)
 
         return memory
 
-    def sync(self, replay_memory: ReplayMemory, name: str = None) -> str:
-        """
-        Saves replay memory to a named slot and fetches new entries which could
-        have appeared from parallel processes.
-        """
-        pass
+    def unique(self, memory: ReplayMemory) -> ReplayMemory:
+        unique_items = {}
+
+        for i, sample in memory.enumerate():
+            serialized_sample = self.sample_serializer.serialize(sample)
+            key = base64.encodebytes(serialized_sample)
+            unique_items[key] = sample
+
+        def enum_dict_values(dict):
+            for i, v in enumerate(dict.values()):
+                yield v
+
+        result = ReplayMemory()
+        result.add_samples(enum_dict_values(unique_items))
+
+        return result

@@ -23,6 +23,7 @@ class MyTestCase(unittest.TestCase):
                 self.assertEqual(sample.reward, restored_sample.reward)
                 self.assertEqual(sample.done, restored_sample.done)
                 self.assertEqual(sample.action, restored_sample.action)
+                self.assertTrue(np.array_equal(sample.move_mask, restored_sample.move_mask))
 
 
 if __name__ == '__main__':
