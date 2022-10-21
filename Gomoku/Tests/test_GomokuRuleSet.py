@@ -12,8 +12,9 @@ class GomokuRuleSetTest(unittest.TestCase):
         for i, board_data in enumerate(boards):
             with self.subTest(i):
                 board = board_data[0]
-                result = board_data[1]
-                self.assertEqual(result, rule_set.check_game_ended(board))
+                expected_result = board_data[1]
+                result, _ = rule_set.check_game_ended(board)
+                self.assertEqual(expected_result, result)
 
     def test_can_place(self):
         rule_set = GomokuRuleSet()

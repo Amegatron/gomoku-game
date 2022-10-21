@@ -60,6 +60,13 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(0, mask[5, 6])
         self.assertEqual(1, mask[2, 2])
 
+    def test_dimensions(self):
+        width = 3
+        gomokuenv = GomokuEnv(width, 2)
+
+        for i in range(width):
+            gomokuenv.step(i, 0)
+
 
 if __name__ == '__main__':
     unittest.main()

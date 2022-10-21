@@ -17,7 +17,7 @@ class GomokuEnv:
 
     def step(self, x, y):
         current_player = self.game.get_current_player()
-        result = self.game.make_move(x, y)
+        result, _ = self.game.make_move(x, y)
         obs = self.board_to_state(self.game.board)
         done = result != 0
         reward = self.win_reward if result == current_player else 0

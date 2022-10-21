@@ -13,9 +13,14 @@ class GameBoardStringRenderer:
     def render(self, board: GameBoard):
         result = "   "
         base_char = ord("A")
+        max_char = ord("Z")
+        range_len = max_char - base_char
 
         for i in range(board.x):
-            result += " " + chr(base_char + i)
+            if i <= range_len:
+                result += " " + chr(base_char + i)
+            else:
+                result += " " + chr(base_char + i - range_len - 1).lower()
 
         result += "\n"
 

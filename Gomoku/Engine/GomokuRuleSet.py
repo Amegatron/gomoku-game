@@ -21,35 +21,35 @@ class GomokuRuleSet:
                     empty_counter += 1
                     continue
 
-                if i <= game_board.x - 4:
+                if i < game_board.x - 4:
                     if game_board.board[i + 1][j] == current_player and \
                             game_board.board[i + 2][j] == current_player and \
                             game_board.board[i + 3][j] == current_player and \
                             game_board.board[i + 4][j] == current_player:
-                        return current_player
+                        return current_player, (i, j, "right")
 
                     if j >= 4:
                         if game_board.board[i + 1][j - 1] == current_player and \
                                 game_board.board[i + 2][j - 2] == current_player and \
                                 game_board.board[i + 3][j - 3] == current_player and \
                                 game_board.board[i + 4][j - 4] == current_player:
-                            return current_player
+                            return current_player, (i, j, "top_right")
 
-                if j <= game_board.y - 4:
+                if j < game_board.y - 4:
                     if game_board.board[i][j+1] == current_player and \
                             game_board.board[i][j+2] == current_player and \
                             game_board.board[i][j+3] == current_player and \
                             game_board.board[i][j+4] == current_player:
-                        return current_player
+                        return current_player, (i, j, "down")
 
-                    if i <= game_board.x - 4:
+                    if i < game_board.x - 4:
                         if game_board.board[i+1][j+1] == current_player and \
                                 game_board.board[i+2][j+2] == current_player and \
                                 game_board.board[i+3][j+3] == current_player and \
                                 game_board.board[i+4][j+4] == current_player:
-                            return current_player
+                            return current_player, (i, j, "down_right")
 
                 # No need to check other directions because they are opposite to what
                 # we have already checked
 
-        return 0 if empty_counter > 0 else -1
+        return 0 if empty_counter > 0 else -1, None
